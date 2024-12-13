@@ -2,6 +2,6 @@
     "name": "Renogy",
     "homeassistant": "2024.11.0",
     "zip_release": true,
-    "filename": "ha-renogy.zip",
+    "filename": "renogy.zip",
     "render_readme": true
 }

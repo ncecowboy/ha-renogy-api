@@ -26,12 +26,12 @@ jobs:
       - name: Create Zip File
         run: |
           cd ${{ github.workspace }}/custom_components/renogy
-          zip ha-renogy.zip -r ./
+          zip renogy.zip -r ./
       - name: Upload zip to release
-        uses: svenstaro/upload-release-action@v1-release
+        uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/custom_components/renogy/ha-renogy.zip
-          asset_name: ha-renogy.zip
+          file: ${{ github.workspace }}/custom_components/renogy/renogy.zip
+          asset_name: renogy.zip
           tag: ${{ github.ref }}
           overwrite: true
