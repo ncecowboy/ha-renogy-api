@@ -1,6 +1,7 @@
 name: Release
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
 
@@ -14,12 +15,13 @@ jobs:
 
       - name: Get Version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        #run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
 
       - name: "Set version numbmer"
         run: |
-          sed -i '/VERSION = /c\VERSION = "${{ steps.get_version.outputs.VERSION }}"' ${{ github.workspace }}/custom_components/ha-renogy/const.py
-          sed -i '/version/c\  \"version\": \"${{ steps.get_version.outputs.VERSION }}\",' ${{ github.workspace }}/custom_components/ha-renogy/manifest.json
+          sed -i '/VERSION = /c\VERSION = "${{ steps.get_version.outputs.VERSION }}"' ${{ github.workspace }}/custom_components/renogy/const.py
+          sed -i '/version/c\  \"version\": \"${{ steps.get_version.outputs.VERSION }}\",' ${{ github.workspace }}/custom_components/renogy/manifest.json
       # Pack the ha-renogy dir as a zip and upload to the release
       - name: Create Zip File
         run: |
