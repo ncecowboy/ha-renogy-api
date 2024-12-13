@@ -1,0 +1,14 @@
+{
+    "domain": "renogy",
+    "name": "Renogy",
+    "codeowners": ["@firstof9"],
+    "config_flow": true,
+    "documentation": "https://github.com/firstof9/ha-renogy/",
+    "import_executor": true,
+    "iot_class": "cloud_polling",
+    "issue_tracker": "https://github.com/firstof9/ha-renogy/issues",
+    "loggers": ["renogyapi"],
+    "requirements": ["py_renogy==1.0.0"],
+    "version": "0.0.0-dev"
+}
+  
