@@ -1,10 +1,11 @@
 """Provide common pytest fixtures."""
 
 import json
+from unittest.mock import patch
 
 import pytest
 from aioresponses import aioresponses
-from unittest.mock import patch
+
 from .common import load_fixture
 
 BASE_URL = "https://openapi.renogy.com"
@@ -36,6 +37,7 @@ def mock_aioclient():
     """Fixture to mock aioclient calls."""
     with aioresponses() as m:
         yield m
+
 
 @pytest.fixture(name="mock_api")
 def mock_api(mock_aioclient):
@@ -69,4 +71,4 @@ def mock_api(mock_aioclient):
         status=200,
         body=load_fixture("realtime_data.json"),
         repeat=True,
-    )    
+    )

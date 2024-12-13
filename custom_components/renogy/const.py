@@ -16,14 +16,11 @@ from homeassistant.components.sensor import (
 from homeassistant.const import (
     PERCENTAGE,
     Platform,
-    SIGNAL_STRENGTH_DECIBELS,
     UnitOfElectricCurrent,
     UnitOfElectricPotential,
     UnitOfEnergy,
-    UnitOfLength,
     UnitOfPower,
     UnitOfTemperature,
-    UnitOfTime,
 )
 from homeassistant.helpers.entity import EntityCategory
 
@@ -132,7 +129,7 @@ SENSOR_TYPES: Final[dict[str, SensorEntityDescription]] = {
         name="Battery Level",
         native_unit_of_measurement=PERCENTAGE,
         suggested_display_precision=1,
-    ),    
+    ),
     "loadAmps": SensorEntityDescription(
         key="loadAmps",
         name="Load Ampers",

@@ -1,7 +1,8 @@
 """Test renogy setup process."""
 
-from unittest.mock import patch
 import logging
+from unittest.mock import patch
+
 import pytest
 from homeassistant.components.binary_sensor import DOMAIN as BINARY_SENSOR_DOMAIN
 from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN

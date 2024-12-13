@@ -1,7 +1,8 @@
 """Test renogy binary sensors."""
 
-from unittest.mock import patch
 import logging
+from unittest.mock import patch
+
 import pytest
 from homeassistant.components.binary_sensor import DOMAIN as BINARY_SENSOR_DOMAIN
 from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN
@@ -14,6 +15,7 @@ from .const import CONFIG_DATA
 pytestmark = pytest.mark.asyncio
 
 DEVICE_NAME = "Renogy Core"
+
 
 async def test_binary_sensors(hass, mock_api, caplog):
     """Test setup_entry."""

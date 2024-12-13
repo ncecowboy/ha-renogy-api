@@ -3,32 +3,26 @@
 from __future__ import annotations
 
 import asyncio
-import functools
 import logging
 from datetime import timedelta
 
-from renogyapi import Renogy as api
-
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import (
-    HomeAssistant,
-)
+from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from renogyapi import Renogy as api
 
 from .const import (
     CONF_ACCESS_KEY,
     CONF_NAME,
     CONF_SECRET_KEY,
-    DOMAIN,
-    MANAGER,
     COORDINATOR,
-    VERSION,
-    PLATFORMS,
+    DOMAIN,
     ISSUE_URL,
-    SENSOR_TYPES,
-    BINARY_SENSORS,
+    MANAGER,
+    PLATFORMS,
+    VERSION,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -65,18 +59,13 @@ async def async_setup_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> b
         MANAGER: manager,
     }
 
-    # for loop thru devices listed in coordinator here and build device_registry
-    # "deviceId": "1234567890",
-    # "sn": "TOTALLYFAKESN",            'serial_number'
-    # "sku": "RSHGWSN-W02W-G1",         'model_id'
-    # "name": "Renogy ONE Core",        'model'
-    # "mac": "DE:AD:BE:EF:FE:ED",       'mac'
-    # "firmware": "V1.1.157",           'sw_version'
-
     device_registry = dr.async_get(hass)
     x = 0
     hub = ""
-    for device_id, device in coordinator.data.items():
+    for (
+        device_id,  # pylint: disable=unused-variable
+        device,
+    ) in coordinator.data.items():
         _LOGGER.debug("DEVICE: %s", device)
         if x == 0:
             if "serial" in device.keys() and device["serial"] != "":
@@ -94,7 +83,7 @@ async def async_setup_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> b
                 model_id=device["model"],
                 sw_version=device["firmware"],
             )
-            x+=1
+            x += 1
         else:
             if "serial" in device.keys() and device["serial"] != "":
                 serial = device["serial"]

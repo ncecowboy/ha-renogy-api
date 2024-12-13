@@ -4,17 +4,15 @@ from __future__ import annotations
 
 import logging
 from typing import Any
-from datetime import timedelta
 
 from homeassistant.components.sensor import (
-    SensorDeviceClass,
     SensorEntity,
     SensorEntityDescription,
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import CONF_NAME, COORDINATOR, DOMAIN, SENSOR_TYPES
+from .const import COORDINATOR, DOMAIN, SENSOR_TYPES
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -39,7 +37,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
                     RenogySensor(
                         SENSOR_TYPES[sensor], unique_id, device_id, coordinator, entry
                     )
-                )    
+                )
 
     async_add_entities(sensors, False)
 
@@ -98,16 +96,10 @@ class RenogySensor(CoordinatorEntity, SensorEntity):
     @property
     def available(self) -> bool:
         """Return if entity is available."""
-        data = self.coordinator.data[self._device_id]["data"]
-        data2 = self.coordinator.data[self._device_id]
-        if (
-            (self._type not in data
-            and self._type not in data2)
-            or ((self._type in data and data[self._type] is None)
-            and (self._type in data2 and data2[self._type is None]))
-        ):
-            return False
-        return self.coordinator.last_update_success
+        data = self.coordinator.data[self._device_id]
+        return self._type not in data or (
+            self._type in data and data[self._type] is not None
+        )
 
     @property
     def should_poll(self) -> bool:

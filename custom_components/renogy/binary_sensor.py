@@ -13,7 +13,7 @@ from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
 )
 
-from .const import BINARY_SENSORS, CONF_NAME, COORDINATOR, DOMAIN
+from .const import BINARY_SENSORS, COORDINATOR, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -50,7 +50,7 @@ async def async_setup_entry(hass, entry, async_add_devices):
                         coordinator,
                         entry,
                     )
-                )                
+                )
 
     async_add_devices(binary_sensors, False)
 
