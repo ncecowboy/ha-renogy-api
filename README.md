@@ -18,7 +18,7 @@ _Component to integrate with [Renogy][renogy] chargers._
 Platform | Description
 -- | --
 `binary_sensor` | On/Off sensors for various settings.
-`sensor` | Show info from an renogy charger's API.
+`sensor` | Show info from an Renogy's API.
 
 ## Installation via HACS (recommended)
 
