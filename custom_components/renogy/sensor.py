@@ -17,9 +17,9 @@ from .const import COORDINATOR, DOMAIN, SENSOR_TYPES
 _LOGGER = logging.getLogger(__name__)
 
 OUTPUT_MODES = {
-    "0": "Eco",
-    "1": "Normal",
-    "2": "Eco",
+    0: "Eco",
+    1: "Normal",
+    2: "Eco",
 }
 
 
