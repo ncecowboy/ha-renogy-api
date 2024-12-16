@@ -281,8 +281,7 @@ SENSOR_TYPES: Final[dict[str, SensorEntityDescription]] = {
         key="chargePriority",
         name="Charge Priority",
         icon="mdi:priority-high",
-        suggested_display_precision=0,
-        entity_category=EntityCategory.CONFIG,
+        entity_category=EntityCategory.DIAGNOSTIC,
     ),
     "output": SensorEntityDescription(
         key="output",
