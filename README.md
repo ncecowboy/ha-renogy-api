@@ -20,8 +20,7 @@ Platform | Description
 `binary_sensor` | On/Off sensors for various settings.
 `sensor` | Show info from an Renogy's API.
 
-**Obtaining your Renogy API Keys
-**
+## Obtaining your Renogy API Keys
 
 You will require two keys to use this integration. The keys can be obtained at Renogy's deveopler platform here:
 
