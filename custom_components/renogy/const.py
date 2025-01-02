@@ -60,6 +60,11 @@ BINARY_SENSORS: Final[dict[str, BinarySensorEntityDescription]] = {
         key="state",
         entity_category=EntityCategory.DIAGNOSTIC,
     ),
+    "alarm": BinarySensorEntityDescription(
+        name="Status",
+        key="alarm",
+        device_class=BinarySensorDeviceClass.DOOR,
+    ),
 }
 
 SENSOR_TYPES: Final[dict[str, SensorEntityDescription]] = {
@@ -356,5 +361,17 @@ SENSOR_TYPES: Final[dict[str, SensorEntityDescription]] = {
         state_class=SensorStateClass.TOTAL_INCREASING,
         device_class=SensorDeviceClass.ENERGY,
         suggested_display_precision=2,
+    ),
+    "humidity": SensorEntityDescription(
+        key="humidity",
+        name="Humidity",
+        native_unit_of_measurement=PERCENTAGE,
+        suggested_display_precision=1,
+    ),
+    "lowbattery": SensorEntityDescription(
+        key="lowbattery",
+        name="Battery Level",
+        native_unit_of_measurement=PERCENTAGE,
+        suggested_display_precision=1,
     ),
 }
