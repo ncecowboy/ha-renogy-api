@@ -10,7 +10,6 @@ from homeassistant import config_entries
 from homeassistant.helpers import config_validation as cv
 from renogyapi import Renogy as api
 from renogyapi.exceptions import (
-    APIError,
     NoDevices,
     NotAuthorized,
     RateLimit,
@@ -59,9 +58,6 @@ class OpenEVSEFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             except RateLimit:
                 _LOGGER.exception("Rate limit exceeded.")
                 self._errors[CONF_NAME] = "rate_limit"
-            except APIError:
-                _LOGGER.exception("API error communicating with Renogy.")
-                self._errors[CONF_NAME] = "api_error"
             except UrlNotFound:
                 _LOGGER.exception("URL error communicating with Renogy.")
                 self._errors[CONF_NAME] = "api_error"
@@ -112,9 +108,6 @@ class OpenEVSEFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             except RateLimit:
                 _LOGGER.exception("Rate limit exceeded.")
                 self._errors[CONF_NAME] = "rate_limit"
-            except APIError:
-                _LOGGER.exception("API error communicating with Renogy.")
-                self._errors[CONF_NAME] = "api_error"
             except UrlNotFound:
                 _LOGGER.exception("URL error communicating with Renogy.")
                 self._errors[CONF_NAME] = "api_error"
