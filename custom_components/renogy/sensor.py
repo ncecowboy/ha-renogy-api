@@ -28,7 +28,7 @@ BATTERY_TYPE = {
     3: "AGM",
     4: "Lithium",
 }
-FILTER_UNITS = ["℃", "KWh"]
+FILTER_UNITS = ["℃", "KWh", "AH"]
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
