@@ -2,6 +2,9 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Manually enter tag'
   release:
     types: [published]
 
@@ -19,19 +22,33 @@ jobs:
         run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
 
       - name: "Set version numbmer"
+        if: ${{ github.event_name == 'release' }}
         run: |
           sed -i '/VERSION = /c\VERSION = "${{ steps.get_version.outputs.VERSION }}"' ${{ github.workspace }}/custom_components/renogy/const.py
           sed -i '/version/c\  \"version\": \"${{ steps.get_version.outputs.VERSION }}\"' ${{ github.workspace }}/custom_components/renogy/manifest.json
+
+      - name: "Set version numbmer"
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          sed -i '/VERSION = /c\VERSION = "${{inputs.tags}}"' ${{ github.workspace }}/custom_components/renogy/const.py
+          sed -i '/version/c\  \"version\": \"${{inputs.tags}}\"' ${{ github.workspace }}/custom_components/renogy/manifest.json
+
+
       # Pack the ha-renogy dir as a zip and upload to the release
       - name: Create Zip File
         run: |
           cd ${{ github.workspace }}/custom_components/renogy
           zip renogy.zip -r ./
-      - name: Upload zip to release
-        uses: svenstaro/upload-release-action@v2
+
+      - name: 📤 Upload zip to release
+        if: ${{ github.event_name == 'release' }}
+        uses: softprops/action-gh-release@v0.1.15
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/custom_components/renogy/renogy.zip
-          asset_name: renogy.zip
-          tag: ${{ github.ref }}
-          overwrite: true
+          files: ${{ github.workspace }}/custom_components/renogy/renogy.zip
+
+      - name: 📤 Upload zip to release
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          files: ${{ github.workspace }}/custom_components/renogy/renogy.zip
+          tag_name: ${{inputs.tags}}
