@@ -1,6 +1,6 @@
 {
-    "domain": "renogy",
-    "name": "Renogy",
+    "domain": "renogyapi",
+    "name": "Renogy API",
     "codeowners": ["@firstof9"],
     "config_flow": true,
     "documentation": "https://github.com/firstof9/ha-renogy/",
