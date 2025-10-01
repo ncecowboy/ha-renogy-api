@@ -1,5 +1,5 @@
 {
-    "name": "Renogy",
+    "name": "Renogy API",
     "homeassistant": "2024.11.0",
     "zip_release": true,
     "filename": "renogy.zip",
