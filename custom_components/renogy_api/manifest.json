@@ -1,5 +1,5 @@
 {
-    "domain": "renogy_api",
+    "domain": "renogy",
     "name": "Renogy API",
     "codeowners": ["@firstof9"],
     "config_flow": true,
